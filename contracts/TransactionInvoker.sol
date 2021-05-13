@@ -76,6 +76,8 @@ contract TransactionInvoker {
       require(success, 'Transaction failed');
     }
 
+    // To ensure that the caller does not send more funds than used in the transaction payload, we check if the contract
+    // balance is zero here.
     require(address(this).balance == 0, 'Invalid balance');
   }
 
