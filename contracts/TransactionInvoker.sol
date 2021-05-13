@@ -1,6 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/*
+ * @title ERC-3074 (Batch) Transaction Invoker
+ * @author Maarten Zuidhoorn <maarten@zuidhoorn.com>
+ * @notice An EIP-3074 based contract that can send one or more arbitrary transactions in the context of an Externally
+ *  Owned Address (EOA), by using `AUTH` and `AUTHCALL`. See https://github.com/Mrtenz/transaction-invoker for more
+ *  information.
+ */
 contract TransactionInvoker {
   string private constant NAME = 'Transaction Invoker';
   string private constant VERSION = '0.1.0';
@@ -37,18 +44,13 @@ contract TransactionInvoker {
   }
 
   constructor() {
-    uint256 chainId;
-    assembly {
-      chainId := chainid()
-    }
-
     // Since the domain separator depends on the chain ID and contract address, it is dynamically calculated here.
     DOMAIN_SEPARATOR = keccak256(
       abi.encode(
         EIP712DOMAIN_TYPE,
         keccak256(abi.encodePacked(NAME)),
         keccak256(abi.encodePacked(VERSION)),
-        chainId,
+        block.chainid,
         address(this)
       )
     );
@@ -56,11 +58,13 @@ contract TransactionInvoker {
 
   /**
    * @notice Authenticate and send the provided transaction payload(s) in the context of the signer. This function
-   * reverts if the signature is invalid, the nonce is incorrect, or one of the calls failed.
+   *  reverts if the signature is invalid, the nonce is incorrect, or one of the calls failed.
    * @param signature The signature of the transactions to verify.
    * @param transaction The nonce and payload(s) to send.
    */
   function invoke(Signature calldata signature, Transaction calldata transaction) external payable {
+    require(transaction.payload.length > 0, 'No transaction payload');
+
     address signer = authenticate(signature, transaction);
     require(signer != address(0), 'Invalid signature');
     require(transaction.nonce == nonces[signer], 'Invalid nonce');
@@ -71,11 +75,15 @@ contract TransactionInvoker {
       bool success = call(transaction.payload[i]);
       require(success, 'Transaction failed');
     }
+
+    // To ensure that the caller does not send more funds than used in the transaction payload, we check if the contract
+    // balance is zero here.
+    require(address(this).balance == 0, 'Invalid balance');
   }
 
   /**
    * @notice Authenticate based on the signature and transaction. This will calculate the EIP-712 message hash and use
-   * that as commit for authentication.
+   *  that as commit for authentication.
    * @param signature The signature to authenticate with.
    * @param transaction The transaction that was signed.
    * @return signer The recovered signer, or `0x0` if the signature is invalid.
