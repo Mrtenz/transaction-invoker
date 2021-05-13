@@ -37,18 +37,13 @@ contract TransactionInvoker {
   }
 
   constructor() {
-    uint256 chainId;
-    assembly {
-      chainId := chainid()
-    }
-
     // Since the domain separator depends on the chain ID and contract address, it is dynamically calculated here.
     DOMAIN_SEPARATOR = keccak256(
       abi.encode(
         EIP712DOMAIN_TYPE,
         keccak256(abi.encodePacked(NAME)),
         keccak256(abi.encodePacked(VERSION)),
-        chainId,
+        block.chainid,
         address(this)
       )
     );
