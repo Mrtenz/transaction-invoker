@@ -56,6 +56,8 @@ contract TransactionInvoker {
    * @param transaction The nonce and payload(s) to send.
    */
   function invoke(Signature calldata signature, Transaction calldata transaction) external payable {
+    require(transaction.payload.length > 0, 'No transaction payload');
+
     address signer = authenticate(signature, transaction);
     require(signer != address(0), 'Invalid signature');
     require(transaction.nonce == nonces[signer], 'Invalid nonce');
@@ -66,6 +68,8 @@ contract TransactionInvoker {
       bool success = call(transaction.payload[i]);
       require(success, 'Transaction failed');
     }
+
+    require(address(this).balance == 0, 'Invalid balance');
   }
 
   /**
