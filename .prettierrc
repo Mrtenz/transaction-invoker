@@ -6,5 +6,13 @@
   "bracketSpacing": true,
   "jsxBracketSameLine": true,
   "endOfLine": "lf",
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "overrides": [
+    {
+      "files": "*.sol",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }
