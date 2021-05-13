@@ -9,8 +9,8 @@ pragma solidity ^0.8.0;
  *  information.
  */
 contract TransactionInvoker {
-  string private constant NAME = 'Transaction Invoker';
-  string private constant VERSION = '0.1.0';
+  string private constant NAME = "Transaction Invoker";
+  string private constant VERSION = "0.1.0";
 
   // keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")
   bytes32 public constant EIP712DOMAIN_TYPE = 0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f;
@@ -63,22 +63,22 @@ contract TransactionInvoker {
    * @param transaction The nonce and payload(s) to send.
    */
   function invoke(Signature calldata signature, Transaction calldata transaction) external payable {
-    require(transaction.payload.length > 0, 'No transaction payload');
+    require(transaction.payload.length > 0, "No transaction payload");
 
     address signer = authenticate(signature, transaction);
-    require(signer != address(0), 'Invalid signature');
-    require(transaction.nonce == nonces[signer], 'Invalid nonce');
+    require(signer != address(0), "Invalid signature");
+    require(transaction.nonce == nonces[signer], "Invalid nonce");
 
     nonces[signer] += 1;
 
     for (uint256 i = 0; i < transaction.payload.length; i++) {
       bool success = call(transaction.payload[i]);
-      require(success, 'Transaction failed');
+      require(success, "Transaction failed");
     }
 
     // To ensure that the caller does not send more funds than used in the transaction payload, we check if the contract
     // balance is zero here.
-    require(address(this).balance == 0, 'Invalid balance');
+    require(address(this).balance == 0, "Invalid balance");
   }
 
   /**
@@ -99,6 +99,7 @@ contract TransactionInvoker {
     uint256 s = signature.s;
     bool v = signature.v;
 
+    // solhint-disable-next-line no-inline-assembly
     assembly {
       signer := auth(commit, v, r, s)
     }
@@ -116,6 +117,7 @@ contract TransactionInvoker {
     uint256 value = payload.value;
     bytes memory data = payload.data;
 
+    // solhint-disable-next-line no-inline-assembly
     assembly {
       success := authcall(gasLimit, to, value, 0, add(data, 0x20), mload(data), 0, 0)
     }
