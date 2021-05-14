@@ -12,7 +12,11 @@ environments.
 The contract is deployed on the [Puxi testnet](https://github.com/quilt/puxi) at
 0x17C1244D6bBFD6cF5798035505cBdA305d388Bc1. Manually deploying this contract requires a custom version of Solidity,
 which you can find here: https://github.com/quilt/solidity/tree/eip-3074. Alternatively, you can
-use [this forked version of Remix](https://remix.puxi.quilt.link/) to compile and deploy the contract.
+use [this forked version of Remix](https://remix.puxi.quilt.link/) to compile and deploy the contract, or use the compiler that is included in this repo to compile it with Hardhat:
+
+```
+$ yarn hardhat compile
+```
 
 ### Signing a transaction
 
