@@ -69,7 +69,7 @@ Simply replace the values in `message` with the actual values. If you're using y
 sure to also replace the values in the `domain` section.
 
 You can use the script in `scripts/sign.ts` to sign a message using a private key. It uses the typed message
-in `scripts/message.json`. If you want to integrate this into your own UI, you can use
+in `scripts/data/message.json`. If you want to integrate this into your own UI, you can use
 [my EIP-712 library](https://github.com/Mrtenz/eip-712) for constructing compatible messages.
 
 ```bash
@@ -99,9 +99,13 @@ message. You can simply copy and paste the signature and transaction from there.
 
 ## Automated testing
 
-There are some automated tests for the contract in `tests`, which you can run using `yarn test`. Note that this requires
-a global version of Geth being available, which includes support for EIP-3074. The test script will spin up a private
-Geth network temporarily, run the tests, and remove the temporary network again.
+There are some automated tests for the contract in `tests`, which you can run using `yarn test`. Note that this requires 
+Geth being available globally (e.g., in `/usr/bin`), which includes support for EIP-3074. The test script will spin up a
+private Geth network temporarily, run the tests, and remove the temporary network again.
+
+```
+$ yarn test
+```
 
 ---
 

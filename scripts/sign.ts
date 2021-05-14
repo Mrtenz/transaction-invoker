@@ -1,4 +1,4 @@
-import message from './message.json';
+import message from './data/message.json';
 import assert from 'assert';
 import { SigningKey } from '@ethersproject/signing-key';
 import { getMessage, getStructHash, keccak256 } from 'eip-712';
