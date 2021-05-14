@@ -42,3 +42,48 @@ jobs:
 
       - name: Lint Formatting
         run: yarn lint:format
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version:
+          - 14
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Cache Go Modules
+        uses: actions/cache@v2
+        with:
+          path: ~/go/pkg/mod
+          key: go-${{ hashFiles('bin/geth/go.sum') }}
+
+      - name: Compile Geth
+        working-directory: ./bin/geth
+        run: make geth
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: node.js-${{ matrix.node-version }}-yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Compile Contracts
+        run: yarn compile
+
+      - name: Test
+        run: yarn test

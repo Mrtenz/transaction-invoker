@@ -1,0 +1,4 @@
+[submodule "bin/geth"]
+	path = bin/geth
+	url = https://github.com/quilt/go-ethereum.git
+	branch = eip-3074
