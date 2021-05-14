@@ -1,0 +1,44 @@
+{
+  "types": {
+    "EIP712Domain": [
+      { "name": "name", "type": "string" },
+      { "name": "version", "type": "string" },
+      { "name": "chainId", "type": "uint256" },
+      { "name": "verifyingContract", "type": "address" }
+    ],
+    "Transaction": [
+      { "name": "nonce", "type": "uint256" },
+      { "name": "payload", "type": "TransactionPayload[]" }
+    ],
+    "TransactionPayload": [
+      { "name": "to", "type": "address" },
+      { "name": "value", "type": "uint256" },
+      { "name": "gasLimit", "type": "uint256" },
+      { "name": "data", "type": "bytes" }
+    ]
+  },
+  "primaryType": "Transaction",
+  "domain": {
+    "name": "Transaction Invoker",
+    "version": "0.1.0",
+    "chainId": 224525,
+    "verifyingContract": "0x5b99395174edFAE1A841cc020b1677fdEEECfCc2"
+  },
+  "message": {
+    "nonce": 0,
+    "payload": [
+      {
+        "to": "0x59A897A2dbd55D20bCC9B52d5eaA14E2859Dc467",
+        "value": 1,
+        "gasLimit": 100000,
+        "data": "0x"
+      },
+      {
+        "to": "0x7D5e716Bbc8771af9c5ec3b0555B48a4a84d4ba7",
+        "value": 1,
+        "gasLimit": 100000,
+        "data": "0x"
+      }
+    ]
+  }
+}

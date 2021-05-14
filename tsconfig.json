@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "outDir": "lib",
     "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
-    "declaration": true,
-    "sourceMap": true,
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["scripts"]
+  "include": ["tests", "scripts"],
+  "files": ["./hardhat.config.ts"]
 }
