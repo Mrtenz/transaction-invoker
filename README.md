@@ -16,7 +16,7 @@ use [this forked version of Remix](https://remix.puxi.quilt.link/) to compile an
 compiler that is included in this repo to compile it with Hardhat:
 
 ```
-$ yarn hardhat compile
+$ yarn compile
 ```
 
 ### Signing a transaction

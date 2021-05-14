@@ -37,6 +37,7 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
+    "compile": "hardhat compile",
     "test": "ts-node scripts/run-tests",
     "sign": "ts-node scripts/sign",
     "format": "prettier --write --ignore-path .gitignore '**/*.{ts,tsx,js,json,yml,sol}'",
