@@ -12,11 +12,16 @@ contract TransactionInvoker {
   string private constant NAME = "Transaction Invoker";
   string private constant VERSION = "0.1.0";
 
-  bytes32 public constant EIP712DOMAIN_TYPE = keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
+  bytes32 public constant EIP712DOMAIN_TYPE =
+    keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
 
-  bytes32 public constant TRANSACTION_TYPE = keccak256("Transaction(uint256 nonce,TransactionPayload[] payload)TransactionPayload(address to,uint256 value,uint256 gasLimit,bytes data)");
+  bytes32 public constant TRANSACTION_TYPE =
+    keccak256(
+      "Transaction(uint256 nonce,TransactionPayload[] payload)TransactionPayload(address to,uint256 value,uint256 gasLimit,bytes data)"
+    );
 
-  bytes32 public constant TRANSACTION_PAYLOAD_TYPE = keccak256("TransactionPayload(address to,uint256 value,uint256 gasLimit,bytes data)");
+  bytes32 public constant TRANSACTION_PAYLOAD_TYPE =
+    keccak256("TransactionPayload(address to,uint256 value,uint256 gasLimit,bytes data)");
 
   bytes32 public immutable DOMAIN_SEPARATOR;
 
