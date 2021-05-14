@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { subtask } from 'hardhat/config';
+import { HardhatUserConfig, subtask } from 'hardhat/config';
 import { TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD } from 'hardhat/builtin-tasks/task-names';
 
 import '@nomiclabs/hardhat-solhint';
@@ -26,8 +26,20 @@ subtask<{ solcVersion: string }>(TASK_COMPILE_SOLIDITY_GET_SOLC_BUILD, async (ar
   return next();
 });
 
-export default {
+const config: HardhatUserConfig = {
+  defaultNetwork: 'private',
   solidity: {
     version: '0.8.2'
+  },
+  networks: {
+    private: {
+      chainId: 224525,
+      url: 'http://localhost:8546',
+      accounts: {
+        mnemonic: 'test test test test test test test test test test test ball'
+      }
+    }
   }
 };
+
+export default config;

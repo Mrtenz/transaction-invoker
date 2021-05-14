@@ -1,0 +1,8 @@
+{
+  "clearMocks": true,
+  "collectCoverageFrom": ["**/*.ts?(x)", "!**/*.d.ts"],
+  "transform": {
+    "^.+\\.[t|j]sx?$": "ts-jest"
+  },
+  "testEnvironment": "node"
+}

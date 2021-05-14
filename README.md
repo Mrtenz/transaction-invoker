@@ -12,7 +12,8 @@ environments.
 The contract is deployed on the [Puxi testnet](https://github.com/quilt/puxi) at
 0x17C1244D6bBFD6cF5798035505cBdA305d388Bc1. Manually deploying this contract requires a custom version of Solidity,
 which you can find here: https://github.com/quilt/solidity/tree/eip-3074. Alternatively, you can
-use [this forked version of Remix](https://remix.puxi.quilt.link/) to compile and deploy the contract, or use the compiler that is included in this repo to compile it with Hardhat:
+use [this forked version of Remix](https://remix.puxi.quilt.link/) to compile and deploy the contract, or use the
+compiler that is included in this repo to compile it with Hardhat:
 
 ```
 $ yarn hardhat compile
@@ -95,6 +96,12 @@ following values:
 
 If you are using the signing tool in `scripts/sign.ts`, it will generate Remix-compatible output based on the typed
 message. You can simply copy and paste the signature and transaction from there.
+
+## Automated testing
+
+There are some automated tests for the contract in `tests`, which you can run using `yarn test`. Note that this requires
+a global version of Geth being available, which includes support for EIP-3074. The test script will spin up a private
+Geth network temporarily, run the tests, and remove the temporary network again.
 
 ---
 
