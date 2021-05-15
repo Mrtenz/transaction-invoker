@@ -25,7 +25,7 @@ interface IERC20 {
  */
 contract MockERC20 is IERC20 {
   mapping(address => uint256) private balances;
-  mapping(address => mapping(address => uint256)) allowances;
+  mapping(address => mapping(address => uint256)) private allowances;
 
   function balanceOf(address owner) external view override returns (uint256) {
     return balances[owner];

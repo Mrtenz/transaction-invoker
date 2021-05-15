@@ -8,7 +8,7 @@ import "./MockERC20.sol";
  *  purposes only.
  */
 contract MockTokenReceiver {
-  mapping(address => uint256) balance;
+  mapping(address => uint256) private balance;
 
   function deposit(address tokenAddress) external {
     IERC20 token = IERC20(tokenAddress);

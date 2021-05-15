@@ -1,0 +1,6 @@
+node_modules
+artifacts
+cache
+typechain
+geth/data/geth/
+bin

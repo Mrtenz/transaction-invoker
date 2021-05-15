@@ -6,10 +6,11 @@ pragma solidity ^0.8.0;
  */
 contract MockInvalid {
   function foo() external pure {
-    revert();
+    revert("Invalid");
   }
 
+  // solhint-disable-next-line payable-fallback
   fallback() external {
-    revert();
+    revert("Invalid");
   }
 }
