@@ -40,10 +40,10 @@
     "compile": "hardhat compile",
     "test": "ts-node scripts/run-tests",
     "sign": "ts-node scripts/sign",
-    "format": "prettier --write --ignore-path .gitignore '**/*.{ts,tsx,js,json,yml,sol}'",
+    "format": "prettier --write --ignore-path .prettierignore '**/*.{ts,tsx,js,json,yml,sol}'",
     "lint": "yarn lint:contracts && yarn lint:format",
-    "lint:contracts": "solhint \"contracts/**/*\"",
-    "lint:format": "prettier --check --ignore-path .gitignore \"**/*.{ts,tsx,js,json,yml,sol}\"",
+    "lint:contracts": "solhint \"contracts/**/*.sol\"",
+    "lint:format": "prettier --check --ignore-path .prettierignore \"**/*.{ts,tsx,js,json,yml,sol}\"",
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
