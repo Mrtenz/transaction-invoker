@@ -23,22 +23,5 @@
     "version": "0.1.0",
     "chainId": 224525,
     "verifyingContract": "0x5b99395174edFAE1A841cc020b1677fdEEECfCc2"
-  },
-  "message": {
-    "nonce": 0,
-    "payload": [
-      {
-        "to": "0x59A897A2dbd55D20bCC9B52d5eaA14E2859Dc467",
-        "value": 1,
-        "gasLimit": 100000,
-        "data": "0x"
-      },
-      {
-        "to": "0x7D5e716Bbc8771af9c5ec3b0555B48a4a84d4ba7",
-        "value": 1,
-        "gasLimit": 100000,
-        "data": "0x"
-      }
-    ]
   }
 }

@@ -16,10 +16,15 @@ const GETH_ARGS = `--datadir ${GETH_DATA_DIR} --nodiscover --port 30304 --networ
 const executable = existsSync(GETH_EXECUTABLE) ? GETH_EXECUTABLE : 'geth';
 execSync(`${executable} init --datadir ${GETH_DATA_DIR} ${GENESIS_FILE}`, { stdio: 'ignore' });
 
-// Runs the Geth node and tests
+// Runs the Geth node
 const geth = spawn(executable, GETH_ARGS.split(' '));
-execSync('yarn jest', { cwd: ROOT_DIR, stdio: 'inherit' });
 
-// Kills the Geth node after the tests and clears the network data
-geth.kill();
-rimraf.sync(resolve(GETH_DATA_DIR, 'geth'));
+try {
+  execSync('yarn jest', { cwd: ROOT_DIR, stdio: 'inherit' });
+} catch (e) {
+  console.error(e);
+} finally {
+  // Kills the Geth node after the tests and clears the network data
+  geth.kill();
+  rimraf.sync(resolve(GETH_DATA_DIR, 'geth'));
+}
