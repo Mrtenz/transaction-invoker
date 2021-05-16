@@ -1,8 +1,8 @@
 # EIP-3074 (Batch) Transaction Invoker
 
-An [EIP-3074](EIP-3074) based contract that can send one or more arbitrary transactions in the context of an Externally
-Owned Address (EOA), by using `AUTH` and `AUTHCALL`. The contract currently uses EIP-712-based messages for
-authentication.
+An [EIP-3074](https://eips.ethereum.org/EIPS/eip-3074) based contract that can send one or more arbitrary transactions
+in the context of an Externally Owned Address (EOA), by using `AUTH` and `AUTHCALL`. The contract currently uses
+EIP-712-based messages for authentication.
 
 This contract is a proof of concept, and is **NOT** audited. It's not recommended to use this in production
 environments.
